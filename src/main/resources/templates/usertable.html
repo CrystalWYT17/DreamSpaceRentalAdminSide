@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+
+<head th:replace="common/header :: common-header"/>
+<body>
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <div th:replace="common/header :: navbar" />
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        		<ul class="nav">
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/home}"><i class="ti-dashboard menu-icon"></i>
+            		 	 <span class="menu-title">Main</span></a>
+          			 </li>
+          			 
+         			 <li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">Manage Agents</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic2">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/agentList}">All Lists</a></li>
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/add}">Add Agent</a></li>
+			              </ul>
+			            </div>
+			          </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/basicTable}">
+             				 <i class="ti-user menu-icon"></i>
+             				 <span class="menu-title">Manage Users</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/manageBooking}">
+             				 <i class="ti-clipboard menu-icon"></i>
+             				 <span class="menu-title">Rentee Booking Lists</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/listOfRawHouse}">
+             				 <i class="ti-folder menu-icon"></i>
+             				 <span class="menu-title">House For Rent Forms</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+			            <a class="nav-link" th:href="@{/rentHouse}">
+			              <i class="ti-home menu-icon"></i>
+			              <span class="menu-title">Rent House Lists</span>
+			            </a>
+			          </li>
+			        <li class="nav-item">
+			            <a class="nav-link" th:href="@{/contract}">
+			              <i class="ti-write menu-icon"></i>
+			              <span class="menu-title">Manage Rentee Contract</span>
+			            </a>
+          			</li>
+          			<li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">House Townships</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/townshipTable}">All Lists</a></li>
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/addTownship}">Add Township</a></li>
+			              </ul>
+			            </div>
+			          </li>
+			          <li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">House Types</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic1">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"><a class="nav-link" th:href="@{/typeTable}">All Lists</a></li>
+			                <li class="nav-item"><a class="nav-link" th:href="@{/addType}">Add Type</a></li>
+			              </ul>
+			            </div>
+			          </li>
+        		</ul>
+      		</nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">User List Table</h4>
+                  <p class="card-description">
+                    Admin Manage <code>.User Data</code>
+                  </p>
+                  <div class="table-responsive">
+                   <table class="table table-striped" id="userListTable">
+                      <thead>
+                        <tr>
+                        
+                          <th>firstName</th>
+						<th>lastName</th>
+						<th>userName</th>
+						<th>email</th>
+						<th>phoneno</th>
+						
+						<th>enabled</th>
+						<th>rent</th>
+						<th>owned</th>
+						<th>Action</th>
+
+						
+                        </tr>
+                        
+                        
+                      </thead>
+                      
+                      <tbody>
+                      <tr data-th-each="user : ${userList}">
+                       
+                        
+						
+						
+						
+						<td th:text="${user.firstName}"></td>
+						<td th:text="${user.lastName}"></td>
+						<td th:text="${user.username}"></td>
+						<td th:text="${user.email}"></td>
+						<td th:text="${user.phoneNo}"></td>
+						<td th:text="${user.enabled}"></td>
+						<td th:text="${user.rent}"></td>
+						<td th:text="${user.owned}"></td>
+						
+						<td>
+						
+							
+							<li><a th:href="@{/updateUser?id=}+${user.userId}">Edit</a></li>
+							
+						
+							<input hidden="hidden" name="id" th:value="${user.userId}" />
+							<li><a th:href="@{/removeUser?id=}+${user.userId}">Delete</a></li>
+						</td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+                </div>
+              </div>
+            </div>
+            
+          <div th:replace="common/header :: footer"></div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+ <div th:replace="common/header :: common-js"></div>
+ 	 <!-- data table -->
+<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/scripts.js}"></script>	
+<script th:src="@{../../js/bootbox.min.js}"></script>
+<script th:src="@{/js/dataTables.jqueryui.min.js}"></script>
+<script>
+		$(document).ready(function() {
+			$("#userListTable").DataTable({
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script>
+</body>
+
+</html>

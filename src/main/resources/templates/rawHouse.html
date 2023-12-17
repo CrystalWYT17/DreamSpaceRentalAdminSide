@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+
+<head th:replace="common/header :: common-header"/>
+<body>
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <div th:replace="common/header :: navbar" />
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        		<ul class="nav">
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/home}"><i class="ti-dashboard menu-icon"></i>
+            		 	 <span class="menu-title">Main</span></a>
+          			 </li>
+          			 
+         			 <li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">Manage Agents</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic2">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/agentList}">All Lists</a></li>
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/add}">Add Agent</a></li>
+			              </ul>
+			            </div>
+			          </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/basicTable}">
+             				 <i class="ti-user menu-icon"></i>
+             				 <span class="menu-title">Manage Users</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/manageBooking}">
+             				 <i class="ti-clipboard menu-icon"></i>
+             				 <span class="menu-title">Rentee Booking Lists</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/listOfRawHouse}">
+             				 <i class="ti-folder menu-icon"></i>
+             				 <span class="menu-title">House For Rent Forms</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+			            <a class="nav-link" th:href="@{/rentHouse}">
+			              <i class="ti-home menu-icon"></i>
+			              <span class="menu-title">Rent House Lists</span>
+			            </a>
+			          </li>
+			        <li class="nav-item">
+			            <a class="nav-link" th:href="@{/contract}">
+			              <i class="ti-write menu-icon"></i>
+			              <span class="menu-title">Manage Rentee Contract</span>
+			            </a>
+          			</li>
+          			<li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">House Townships</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/townshipTable}">All Lists</a></li>
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/addTownship}">Add Township</a></li>
+			              </ul>
+			            </div>
+			          </li>
+			          <li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">House Types</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic1">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"><a class="nav-link" th:href="@{/typeTable}">All Lists</a></li>
+			                <li class="nav-item"><a class="nav-link" th:href="@{/addType}">Add Type</a></li>
+			              </ul>
+			            </div>
+			          </li>
+        		</ul>
+      		</nav>
+      <!-- partial -->
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+           
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Agent Update Form</h4>
+                  <p class="card-description">
+                    <span style="color: red;">* is Required Field</span>
+                  </p>
+                  
+                  
+                  <form class="forms-sample" th:action="@{/rawHouseConnect}" method="post" enctype="multipart/form-data" >
+                   
+                   <input hidden="hidden" name="houseId" th:value="${house.houseId}" />
+                   
+                    <div class="form-group">
+                      <label for="agentFName">Price<span style="color: red;">*</span></label>
+                      <input type="text" class="form-control" id="price" name="price" placeholder="Price" th:value="${house.price}" required="required">
+                    </div>
+                    <div class="form-group">
+                      <label for="agentLName">Address<span style="color: red;">*</span></label>
+                      <input type="text" class="form-control" id="address" name="address" placeholder="Address" th:value="${house.address}" required="required">
+                    </div>
+                   
+                    <div class="form-group">
+                     <input hidden="hidden" name="id" th:value="${agent.id}" />
+                      <label for="agentTownship">Agent<span style="color: red;">*</span></label>
+                        <select class="form-control" id="agentFName" name="agentFName" th:value="${agent.agentFName}" required="required">
+                          <option data-th-each="agent : ${agentList}" th:value="${agent.agentFName}" th:text="${agent.agentFName}" th:selected="(${agent.agentFName}==agent)">
+                          	
+                          </option>
+                        </select>
+                      </div>
+                    
+                   
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <a th:href="@{/listOfRawHouse}" class="btn btn-light">Cancel</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+           
+            
+         
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <div th:replace="common/header :: footer"></div>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="../../vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="../../js/off-canvas.js"></script>
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/template.js"></script>
+  <script src="../../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../../js/file-upload.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+  <head>
+  	<title>LogIn To Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="css/login/style.css">
+
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last" style="background: #89e894;">
+						
+							<div class="text w-100">
+							<img src="images/1.JPG" alt="sing up image"><br>
+								<h2>Welcome to Admin Dashboard</h2>
+								
+							</div>
+			      		</div>
+					<div class="login-wrap p-4 p-lg-5">
+			      		<div class="d-flex">
+			      			<div class="w-100 text-center">
+			      				<h3 class="mb-4"><strong> LogIn </strong></h3>
+			      			</div>
+								
+			      		</div>
+					<form th:action="@{/login}" method="POST" class="signin-form">
+			      	<div class="form-group mb-3">
+			      		<label class="label" for="email"> Email <span style="color: red; font-size: 17px;">*</span></label>
+			      		<input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
+			      	</div>
+		            <div class="form-group mb-3">
+		            	<label class="label" for="adminPassword">Password <span style="color: red; font-size: 17px;">*</span></label>
+		              <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+		            </div>
+		            <div class="form-group">
+		            	<button type="submit" class="form-control btn btn-primary submit px-3" style="background: #89e894;">LogIn</button>
+		            </div>
+		            
+		          </form>
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="js/jquery.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+
+	</body>
+</html>
+

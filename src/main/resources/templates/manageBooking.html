@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+	<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <div th:replace="common/header :: navbar" />
+    	<div class="container-fluid page-body-wrapper">
+    		<nav class="sidebar sidebar-offcanvas" id="sidebar">
+        		<ul class="nav">
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/home}"><i class="ti-dashboard menu-icon"></i>
+            		 	 <span class="menu-title">Main</span></a>
+          			 </li>
+          			 
+         			 <li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">Manage Agents</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic2">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/agentList}">All Lists</a></li>
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/add}">Add Agent</a></li>
+			              </ul>
+			            </div>
+			          </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/basicTable}">
+             				 <i class="ti-user menu-icon"></i>
+             				 <span class="menu-title">Manage Users</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/manageBooking}">
+             				 <i class="ti-clipboard menu-icon"></i>
+             				 <span class="menu-title">Rentee Booking Lists</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/listOfRawHouse}">
+             				 <i class="ti-folder menu-icon"></i>
+             				 <span class="menu-title">House For Rent Forms</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+			            <a class="nav-link" th:href="@{/rentHouse}">
+			              <i class="ti-home menu-icon"></i>
+			              <span class="menu-title">Rent House Lists</span>
+			            </a>
+			          </li>
+			        <li class="nav-item">
+			            <a class="nav-link" th:href="@{/contract}">
+			              <i class="ti-write menu-icon"></i>
+			              <span class="menu-title">Manage Rentee Contract</span>
+			            </a>
+          			</li>
+          			<li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">House Townships</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/townshipTable}">All Lists</a></li>
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/addTownship}">Add Township</a></li>
+			              </ul>
+			            </div>
+			          </li>
+			          <li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">House Types</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic1">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"><a class="nav-link" th:href="@{/typeTable}">All Lists</a></li>
+			                <li class="nav-item"><a class="nav-link" th:href="@{/addType}">Add Type</a></li>
+			              </ul>
+			            </div>
+			          </li>
+        		</ul>
+      		</nav>
+    	
+    	<!-- Table Design -->
+    	<div class="main-panel">
+    		<div class="content-wrapper">
+          		<div class="row">
+          			<div class="col-lg-12 grid-margin stretch-card">
+              			<div class="card">
+                			<div class="card-body">
+                  				<h3 class="card-title">Rentee Booking Lists</h3>
+                  					
+                  					<div class="table-responsive">
+                    					<table id="renteeBookingTable" class="table">                					
+                      						<thead>
+                        					<tr>
+                        					<th>House Id</th>
+                          					<th>Customer Name</th>
+                          					<th>Phone Number</th>
+                          					<th>Email</th>
+                          					<th>Expected Time</th>
+                          					<th>Expected Date</th>
+                          					<th>Action</th>
+                        					</tr>
+                      						</thead>
+                      					<tbody>
+                      					
+                      					<tr data-th-each="booking : ${bookingList}">
+											
+											<td th:text="${booking.houseId}"></td>
+											<td th:text="${booking.customerName}"></td>
+											<td th:text="${booking.phoneNo}"></td>
+											<td th:text="${booking.email}"></td>
+											<td th:text="${booking.expectedTime}"></td>
+											<td th:text="${booking.expectedDate}"></td>
+											<td>
+											<form th:action="@{/approveBooking}" method="post">
+											<div th:if="${alreadyApproved}" ><h4 style="color: green;">Already Approved</h4></div>
+												<input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
+												<button class="btn btn-success btn-xs" type="submit" value="Approve" >
+												<span class="fa fa-times"></span>Approve</button >
+											</form >	<br>
+											<form th:action="@{/deleteBooking}" method="post">
+												<input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
+												<button class="btn btn-danger btn-xs delete-book" type="submit" value="Cancel" >
+												<span class="fa fa-times"></span>Delete</button >
+											</form >
+											</td>
+										</tr>
+                        				
+                      					</tbody>
+                    				</table>
+                 	 			</div>
+                			</div>
+              			</div>
+            		</div>
+          		</div>
+    		</div>
+    		<div th:replace="common/header :: footer"></div>
+    	</div>
+    	</div>
+	</div>
+	<div th:replace="common/header :: common-js"></div>
+	 <!-- data table -->
+<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/scripts.js}"></script>	
+<script th:src="@{../../js/bootbox.min.js}"></script>
+<script th:src="@{/js/dataTables.jqueryui.min.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$("#renteeBookingTable").DataTable({
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script>
+</body>	
+</html>

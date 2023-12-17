@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+  <div class="container-scroller">
+  <div th:replace="common/header :: navbar" />
+    <div class="container-fluid page-body-wrapper">
+    
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        		<ul class="nav">
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/home}"><i class="ti-dashboard menu-icon"></i>
+            		 	 <span class="menu-title">Main</span></a>
+          			 </li>
+          			 
+         			 <li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">Manage Agents</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic2">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/agentList}">All Lists</a></li>
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/add}">Add Agent</a></li>
+			              </ul>
+			            </div>
+			          </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/basicTable}">
+             				 <i class="ti-user menu-icon"></i>
+             				 <span class="menu-title">Manage Users</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/manageBooking}">
+             				 <i class="ti-clipboard menu-icon"></i>
+             				 <span class="menu-title">Rentee Booking Lists</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+           				 <a class="nav-link" th:href="@{/listOfRawHouse}">
+             				 <i class="ti-folder menu-icon"></i>
+             				 <span class="menu-title">House For Rent Forms</span>
+           				 </a>
+         			 </li>
+         			 <li class="nav-item">
+			            <a class="nav-link" th:href="@{/rentHouse}">
+			              <i class="ti-home menu-icon"></i>
+			              <span class="menu-title">Rent House Lists</span>
+			            </a>
+			          </li>
+			        <li class="nav-item">
+			            <a class="nav-link" th:href="@{/contract}">
+			              <i class="ti-write menu-icon"></i>
+			              <span class="menu-title">Manage Rentee Contract</span>
+			            </a>
+          			</li>
+          			<li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">House Townships</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/townshipTable}">All Lists</a></li>
+			                <li class="nav-item"> <a class="nav-link" th:href="@{/addTownship}">Add Township</a></li>
+			              </ul>
+			            </div>
+			          </li>
+			          <li class="nav-item">
+			            <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+			              <i class="ti-notepad menu-icon"></i>
+			              <span class="menu-title">House Types</span>
+			              <i class="menu-arrow"></i>
+			            </a>
+			            <div class="collapse" id="ui-basic1">
+			              <ul class="nav flex-column sub-menu">
+			                <li class="nav-item"><a class="nav-link" th:href="@{/typeTable}">All Lists</a></li>
+			                <li class="nav-item"><a class="nav-link" th:href="@{/addType}">Add Type</a></li>
+			              </ul>
+			            </div>
+			          </li>
+        		</ul>
+      		</nav>
+      		<div class="main-panel">
+    			<div class="content-wrapper d-flex align-items-center auth px-0">
+    				<div class="row w-100 mx-0">
+			          <div class="col-lg-8 mx-auto">
+			            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+			              <div class="brand-logo">
+			              <h3>Add New Township</h3>
+			              </div>
+			              <form class="pt-3" th:action="@{/addTownship}" method="POST">
+			                <div class="form-group">
+			                  <input type="text" class="form-control form-control-lg" id="townshipName" placeholder="Township Name" required name="townshipName" th:value="${township.townshipName}" />
+			                </div>
+			                <div class="text-center mt-4 font-weight-light">
+			                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Update Township</button >
+			                </div>
+			                <div class="mt-3">
+			                  <a class="btn btn-block btn-danger btn-lg font-weight-medium auth-form-btn" th:href="@{/townshipTable}">Cancel</a>
+			                </div>
+			                
+			              </form>
+			            </div>
+			          </div>
+			        </div>
+    			</div>
+    			<div th:replace="common/header :: footer"></div>
+    		</div>
+    
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+<div th:replace="common/header :: common-js"></div>
+  <!-- endinject -->
+</body>
+
+</html>
